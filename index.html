@@ -1,0 +1,291 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Romantic App 💚</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #FFF3D5;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .card-wrapper {
+      perspective: 1000px;
+      height: 190px;
+    }
+
+    .card {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.7s;
+      transform-style: preserve-3d;
+    }
+
+    .card.open {
+      transform: rotateY(180deg);
+    }
+
+    .card-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      border-radius: 24px;
+    }
+
+    .card-front {
+      background: linear-gradient(135deg, #4D694E, #3E5740);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .card-back {
+      background: #FFFDF6;
+      transform: rotateY(180deg);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .back-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 32px;
+      color: #4D694E;
+      background: none;
+      border: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<section id="welcomePage" class="min-h-screen flex flex-col items-center justify-center px-6 text-center relative">
+
+  <div class="text-5xl text-[#4D694E] mb-4">♡</div>
+
+  <h1 class="text-5xl font-light text-[#4D694E] lowercase">
+    приветик
+  </h1>
+
+  <p class="text-[#6B7D5C] mt-6">
+    я приготовил для тебя<br />
+    интерактив ✨
+  </p>
+
+  <img
+    src="https://i.ibb.co/fzGVF6YJ/photo-2026-05-20-22-24-30.jpg"
+    class="w-72 h-72 object-cover rounded-[32px] mt-8 shadow-xl"
+  />
+
+  <button
+    onclick="openMemories()"
+    class="bg-[#4D694E] text-[#FFF3D5] px-10 py-4 rounded-full text-lg shadow-lg mt-10"
+  >
+    открыть 💚
+  </button>
+</section>
+
+<!-- PAGE 2 -->
+<section id="memoryPage" class="hidden min-h-screen p-6 relative">
+
+  <button class="back-btn" onclick="backToWelcome()">←</button>
+
+  <h1 class="text-4xl text-[#4D694E] font-light text-center mt-10">
+    карта воспоминаний
+  </h1>
+
+  <p class="text-center text-[#6B7D5C] mt-2 mb-8">
+    самые тёплые моменты
+  </p>
+
+  <div class="space-y-5 max-w-md mx-auto">
+
+    <div class="bg-[#FFFDF6] rounded-[28px] p-5 shadow-xl">
+      <img
+        src="https://ltdfoto.ru/images/2026/05/21/photo_2026-05-21_01-53-25.jpg"
+        class="w-full max-h-[520px] object-contain bg-[#F5EBCF] rounded-[22px] p-2"
+      />
+
+      <p class="text-[#4D694E] mt-4 text-sm">
+        один из самых уютных дней вместе с тобой
+      </p>
+    </div>
+
+    <div class="bg-[#FFFDF6] rounded-[28px] p-4 shadow-xl">
+      <video
+        controls
+        playsinline
+        muted
+        preload="auto"
+        class="w-full rounded-[22px]"
+      >
+        <source src="IMG_5411(1).MP4" type="video/mp4">
+      </video>
+
+      <p class="text-[#4D694E] mt-4 text-sm">
+        маленькое видео-воспоминание 🎞️
+      </p>
+    </div>
+
+    <button
+      onclick="openCards()"
+      class="w-full bg-[#4D694E] text-[#FFF3D5] py-4 rounded-full text-lg shadow-lg"
+    >
+      перейти к карточкам 🎁
+    </button>
+  </div>
+</section>
+
+<!-- PAGE 3 -->
+<section id="cardsPage" class="hidden min-h-screen p-4 relative">
+
+  <button class="back-btn" onclick="backToMemories()">←</button>
+
+  <h1 class="text-3xl font-bold text-[#4D694E] text-center mt-14">
+    present for you ❤️
+  </h1>
+
+  <p class="text-center text-[#6B7D5C] mt-2 mb-8">
+    Выбери 2 любых карточки ✨
+  </p>
+
+  <div id="cardsContainer" class="grid grid-cols-2 gap-4 max-w-md mx-auto"></div>
+
+</section>
+
+<script>
+  const cards = [
+    {
+      title: "1",
+      reward: "минон 💛",
+      image: "https://i1-e.pinimg.com/control1/1200x/60/c3/a1/60c3a1698d57b81f25451313b1df7561.jpg"
+    },
+    {
+      title: "2",
+      reward: "клубничка 🍓",
+      image: "https://i1-e.pinimg.com/control1/1200x/71/ea/82/71ea82901ae925e45f7e5fbe780ef517.jpg"
+    },
+    {
+      title: "3",
+      reward: "Халатус 🌿",
+      image: "https://i1-e.pinimg.com/control1/1200x/d2/08/91/d2089108cd2e0174a2902ae2a50086ee.jpg"
+    },
+    {
+      title: "4",
+      reward: "Букетик 🌷",
+      image: "https://i1-e.pinimg.com/control1/1200x/2e/9d/1c/2e9d1cf567c02fa5cde91d6a38978389.jpg"
+    },
+    {
+      title: "5",
+      reward: "Подарок 🎁",
+      image: "https://images.unsplash.com/photo-1512909006721-3d6018887383?q=80&w=800&auto=format&fit=crop"
+    },
+    {
+      title: "6",
+      reward: "одежда ✨",
+      image: "https://i1-e.pinimg.com/control1/1200x/49/92/f4/4992f411dc3ac613582413c3ff74d464.jpg"
+    },
+    {
+      title: "7",
+      reward: "сладкий подарок 🍰",
+      image: "https://i1-e.pinimg.com/control1/1200x/8c/74/6f/8c746f89c91db0c5b8d8c0f3f80d7a7f.jpg"
+    },
+    {
+      title: "8",
+      reward: "маленький сюрприз 🎀",
+      image: "https://i1-e.pinimg.com/control1/1200x/7f/89/f2/7f89f27c3f89a2f47dcb9c8c3a4f50f7.jpg"
+    }
+  ];
+
+  let opened = [];
+
+  function renderCards() {
+    const container = document.getElementById("cardsContainer");
+
+    cards.forEach((card, index) => {
+      const div = document.createElement("div");
+
+      div.className = "card-wrapper";
+
+      div.innerHTML = `
+        <div class="card" id="card-${index}">
+          <div class="card-face card-front">
+            ${card.title}
+          </div>
+
+          <div class="card-face card-back">
+            <img
+              src="${card.image}"
+              class="w-full h-24 object-cover rounded-2xl mb-3"
+            />
+
+            <div class="text-[#4D694E] text-sm">
+              ${card.reward}
+            </div>
+          </div>
+        </div>
+      `;
+
+      div.onclick = () => {
+        const current = document.getElementById(`card-${index}`);
+
+        if (current.classList.contains("open")) {
+          current.classList.remove("open");
+          opened = opened.filter(i => i !== index);
+          return;
+        }
+
+        if (opened.length >= 2) return;
+
+        current.classList.add("open");
+        opened.push(index);
+      };
+
+      container.appendChild(div);
+    });
+  }
+
+  renderCards();
+
+  function openMemories() {
+    welcomePage.classList.add("hidden");
+    memoryPage.classList.remove("hidden");
+  }
+
+  function backToWelcome() {
+    memoryPage.classList.add("hidden");
+    welcomePage.classList.remove("hidden");
+  }
+
+  function openCards() {
+    memoryPage.classList.add("hidden");
+    cardsPage.classList.remove("hidden");
+  }
+
+  function backToMemories() {
+    cardsPage.classList.add("hidden");
+    memoryPage.classList.remove("hidden");
+  }
+</script>
+
+</body>
+</html>
