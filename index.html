@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+Romantic App 💚
+</title>
+
+<link
+rel="stylesheet"
+href="style.css">
+
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+
+<section
+id="welcomePage"
+class="page welcome-page">
+
+<div class="heart">
+♡
+</div>
+
+<h1 class="title">
+приветик
+</h1>
+
+<p class="subtitle">
+
+я приготовил для тебя
+<br>
+
+интерактив ✨
+
+</p>
+
+<img
+
+src="https://i.ibb.co/fzGVF6YJ/photo-2026-05-20-22-24-30.jpg"
+
+class="welcome-image"
+
+>
+
+<button
+
+onclick="openMemories()"
+
+class="main-button">
+
+открыть 💚
+
+</button>
+
+</section>
+
+<!-- PAGE 2 -->
+
+<section
+
+id="memoryPage"
+
+class="page hidden">
+
+<button
+
+class="back-button"
+
+onclick="backToWelcome()">
+
+←
+
+</button>
+
+<div class="memories-container">
+
+<h1 class="memories-title">
+
+карта воспоминаний
+
+</h1>
+
+<p class="memories-subtitle">
+
+самые тёплые моменты
+
+</p>
+
+<div class="memory-card">
+
+<img
+
+src="https://ltdfoto.ru/images/2026/05/21/photo_2026-05-21_01-53-25.jpg"
+
+class="memory-image"
+
+>
+
+<p class="memory-text">
+
+один из самых уютных дней вместе с тобой
+
+</p>
+
+</div>
+
+<button
+
+onclick="openCards()"
+
+class="main-button"
+
+style="
+width:100%;
+margin-top:0;
+">
+
+перейти к карточкам 🎁
+
+</button>
+
+</div>
+
+</section>
+
+<!-- PAGE 3 -->
+
+<section
+
+id="cardsPage"
+
+class="
+page
+cards-page
+hidden">
+
+<button
+
+class="back-button"
+
+onclick="
+backToMemories()
+">
+
+←
+
+</button>
+
+<h1 class="cards-title">
+
+present for you ❤️
+
+</h1>
+
+<p class="cards-subtitle">
+
+Выбери 2 любых карточки ✨
+
+</p>
+
+<div
+
+id="cardsContainer"
+
+class="cards-grid">
+
+</div>
+
+</section>
+
+<script src="scripts.js">
+</script>
+
+</body>
+
+</html>
